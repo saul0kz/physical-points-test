@@ -2,10 +2,11 @@
 import React, { createContext, useState, useEffect } from 'react';
 import * as auth from '../services/auth';
 import { User } from '../services/auth';
+import api from '../services/api';
 
 interface AuthCOntextData {
   signed: boolean;
-  user: object | null;
+  user: User | null;
   signIn(): Promise<void>;
   signOut(): void;
 }
@@ -18,14 +19,27 @@ export const AuthProvidier: React.FC = ({ children }) => {
   // se logado anteriormente, recupera as credenciais
   useEffect(() => {
     const userLocal = localStorage.getItem('@PhyTest:user');
-    const tokenLocal = localStorage.getItem('@PhyTest:token');
+    const token = localStorage.getItem('@PhyTest:token');
 
-    if (userLocal && tokenLocal) {
+    if (userLocal && token) {
+      api.defaults.headers.authorization = `Bearer ${token}`;
       setUser(JSON.parse(userLocal));
     }
   }, []);
 
   async function signIn() {
+    api
+      .post(`/user/login`, {
+        userName: 'saul0kz',
+        password: '12345678',
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
     const response = await auth.signIn('Saulo', 'Monteiro');
     if (response) {
       localStorage.setItem('@PhyTest:token', response.token);
