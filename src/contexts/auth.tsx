@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import * as auth from '../services/auth';
+import { User } from '../services/auth';
 
 interface AuthCOntextData {
   signed: boolean;
@@ -12,15 +13,31 @@ interface AuthCOntextData {
 const AuthContext = createContext<AuthCOntextData>({} as AuthCOntextData);
 
 export const AuthProvidier: React.FC = ({ children }) => {
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+
+  // se logado anteriormente, recupera as credenciais
+  useEffect(() => {
+    const userLocal = localStorage.getItem('@PhyTest:user');
+    const tokenLocal = localStorage.getItem('@PhyTest:token');
+
+    if (userLocal && tokenLocal) {
+      setUser(JSON.parse(userLocal));
+    }
+  }, []);
 
   async function signIn() {
     const response = await auth.signIn('Saulo', 'Monteiro');
-    setUser(response.user);
+    if (response) {
+      localStorage.setItem('@PhyTest:token', response.token);
+      localStorage.setItem('@PhyTest:user', JSON.stringify(response.user));
+      setUser(response.user);
+    }
   }
 
   function signOut() {
     setUser(null);
+    localStorage.removeItem('@PhyTest:user');
+    localStorage.removeItem('@PhyTest:token');
   }
 
   return (

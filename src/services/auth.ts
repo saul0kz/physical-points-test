@@ -1,9 +1,11 @@
-interface Response {
+export interface User {
+  name: string;
+  email: string;
+}
+
+export interface Response {
   token: string;
-  user: {
-    name: string;
-    email: string;
-  };
+  user: User;
 }
 
 export function signIn(email: string, password: string): Promise<Response> {
