@@ -1,13 +1,20 @@
 /* eslint-disable react/prop-types */
 import React, { createContext, useState, useEffect } from 'react';
-import * as auth from '../services/auth';
-import { User } from '../services/auth';
+
 import api from '../services/api';
+
+interface User {
+  user_id: number;
+  user_name: string;
+  user_email: string;
+  user_password: string;
+  user_full_name: string;
+}
 
 interface AuthCOntextData {
   signed: boolean;
   user: User | null;
-  signIn(): Promise<void>;
+  signIn(userName: string, password: string): Promise<void>;
   signOut(): void;
 }
 
@@ -27,24 +34,18 @@ export const AuthProvidier: React.FC = ({ children }) => {
     }
   }, []);
 
-  async function signIn() {
-    api
-      .post(`/user/login`, {
-        userName: 'saul0kz',
-        password: '12345678',
-      })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  async function signIn(userName: string, password: string) {
+    const response = await api.post(`/user/login`, {
+      userName,
+      password,
+    });
 
-    const response = await auth.signIn('Saulo', 'Monteiro');
-    if (response) {
-      localStorage.setItem('@PhyTest:token', response.token);
-      localStorage.setItem('@PhyTest:user', JSON.stringify(response.user));
-      setUser(response.user);
+    const token = response.headers['x-access-token'];
+    const usr = response.data;
+    if (token) {
+      localStorage.setItem('@PhyTest:token', token);
+      localStorage.setItem('@PhyTest:user', JSON.stringify(usr));
+      setUser(usr);
     }
   }
 
