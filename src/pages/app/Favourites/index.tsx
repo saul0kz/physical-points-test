@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import AuthContext from '../../contexts/auth';
+import AuthContext from '../../../contexts/auth';
 
 const Favourites: React.FC = () => {
   const { signOut } = useContext(AuthContext);
