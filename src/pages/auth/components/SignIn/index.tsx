@@ -1,10 +1,14 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-
 import AuthContext from '../../../../contexts/auth';
 import closeButton from '../../../../img/close-button.svg';
 
-const Signin: React.FC = () => {
+interface ChildProps {
+  closeForm: () => void;
+}
+
+const Signin: React.FC<ChildProps> = (props: ChildProps) => {
   const { signIn } = useContext(AuthContext);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsloading] = useState(false);
@@ -21,10 +25,16 @@ const Signin: React.FC = () => {
     setIsloading(false);
   }
   const isDisabled = !userName || !password || isLoading;
+  const { closeForm } = props;
   return (
     <div className="sign-container">
       <div className="close-button-container">
-        <img alt="" className="close-button" src={closeButton} />
+        <img
+          alt=""
+          className="close-button"
+          src={closeButton}
+          onClick={closeForm}
+        />
       </div>
       <div className="title mb-68">Welcome</div>
       <div className="form">
