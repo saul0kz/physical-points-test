@@ -1,14 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { createContext, useState, useEffect } from 'react';
 
-import api from '../services/api';
-
 interface User {
-  user_id: number;
-  user_name: string;
-  user_email: string;
-  user_password: string;
-  user_full_name: string;
+  userName: string;
+  password: string;
 }
 
 interface AuthCOntextData {
@@ -27,48 +22,44 @@ export const AuthProvidier: React.FC = ({ children }) => {
   // se logado anteriormente, recupera as credenciais
   useEffect(() => {
     const userLocal = localStorage.getItem('@PhyTest:user');
-    const token = localStorage.getItem('@PhyTest:token');
 
-    if (userLocal && token) {
-      api.defaults.headers.authorization = `Bearer ${token}`;
+    if (userLocal) {
       setUser(JSON.parse(userLocal));
     }
   }, []);
 
   async function signIn(userName: string, password: string) {
-    const response = await api.post(`/user/login`, {
-      userName,
-      password,
-    });
+    const users = JSON.parse(localStorage.getItem('@PhyTest:users') || '[]');
+    const usr = { userName, password };
 
-    const token = response.headers['x-access-token'];
-    const usr = response.data;
-    if (token) {
-      localStorage.setItem('@PhyTest:token', token);
-      localStorage.setItem('@PhyTest:user', JSON.stringify(usr));
+    const found = users.find(
+      (element: { userName: string; password: string }) =>
+        element.userName === userName && element.password === password,
+    );
+    if (found) {
       setUser(usr);
+      localStorage.setItem(
+        '@PhyTest:user',
+        JSON.stringify({ userName, password }),
+      );
+    } else {
+      const erroMessage = 'Invalid Credentials';
+      throw erroMessage;
     }
   }
 
   async function signUp(userName: string, password: string) {
-    const response = await api.post(`/user/login`, {
-      userName,
-      password,
-    });
+    const usuario = { userName, password };
 
-    const token = response.headers['x-access-token'];
-    const usr = response.data;
-    if (token) {
-      localStorage.setItem('@PhyTest:token', token);
-      localStorage.setItem('@PhyTest:user', JSON.stringify(usr));
-      setUser(usr);
-    }
+    const users = JSON.parse(localStorage.getItem('@PhyTest:users') || '[]');
+    users.push(usuario);
+    localStorage.setItem('@PhyTest:users', JSON.stringify(users));
+    signIn(userName, password);
   }
 
   function signOut() {
-    setUser(null);
     localStorage.removeItem('@PhyTest:user');
-    localStorage.removeItem('@PhyTest:token');
+    setUser(null);
   }
 
   return (
