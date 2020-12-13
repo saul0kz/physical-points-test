@@ -7,17 +7,20 @@ import closeButton from '../../../../img/close-button.svg';
 const Signin: React.FC = () => {
   const { signIn } = useContext(AuthContext);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsloading] = useState(false);
   const [userName, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   async function handleSigin() {
+    setIsloading(true);
     try {
       await signIn(userName, password);
     } catch (response) {
       setError('falha na Autenticação');
     }
+    setIsloading(false);
   }
-  const isDisabled = !userName || !password;
+  const isDisabled = !userName || !password || isLoading;
   return (
     <div className="sign-container">
       <div className="close-button-container">
@@ -36,10 +39,13 @@ const Signin: React.FC = () => {
         <div className="field">
           <input
             className="input"
-            type="text"
+            type="password"
             onChange={e => setPassword(e.target.value)}
             placeholder="Password"
           />
+        </div>
+        <div className="field">
+          <div className="error">{error}</div>
         </div>
         <div className="field">
           <button
