@@ -4,19 +4,20 @@ import React, { useState } from 'react';
 
 import youtubeApi from '../../../services/api';
 import searchIcon from '../../../img/search.svg';
+import ChannelList from '../components/channelist';
 
-interface Channel {
+export interface Channel {
   channelTitle: string;
   channelId: string;
   thumbnail: string;
 }
 
 const Favourites: React.FC = () => {
-  const [chanels, setChanels] = useState([] as Array<Channel>);
+  const [channels, setChannels] = useState([] as Array<Channel>);
   const [keyword, setKeyword] = useState<string | null>(null);
 
   async function onSearch() {
-    setChanels([]);
+    setChannels([]);
     const response = await youtubeApi.get('/search', {
       params: {
         q: keyword,
@@ -41,7 +42,7 @@ const Favourites: React.FC = () => {
         newChannels.push(channel);
       },
     );
-    setChanels(newChannels);
+    setChannels(newChannels);
   }
 
   return (
@@ -57,8 +58,9 @@ const Favourites: React.FC = () => {
           <img className="search-image" src={searchIcon} alt="" />
         </div>
       </div>
-
-      {chanels.map(item => {
+      <ChannelList channels={channels} />
+      {/*
+      channels.map(item => {
         return [
           <div>
             <div className="toggler">
@@ -67,7 +69,7 @@ const Favourites: React.FC = () => {
             <div>{item.channelTitle}</div>
           </div>,
         ];
-      })}
+      }) */}
     </div>
   );
 };
