@@ -1,7 +1,13 @@
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: 'http://localhost:3333',
-});
+const KEY = 'AIzaSyAXpvu2A_NCMgvS3HMpZrIrwyydytsUCHU';
 
-export default api;
+export default axios.create({
+  baseURL: 'https://www.googleapis.com/youtube/v3',
+  params: {
+    part: 'snippet',
+    maxResults: 10,
+    key: KEY,
+  },
+  headers: {},
+});

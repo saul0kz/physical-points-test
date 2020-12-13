@@ -1,13 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import AuthContext from '../../../contexts/auth';
+import youtubeApi from '../../../services/api';
 
 const Favourites: React.FC = () => {
-  const { signOut } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
+  const [chanels, setChanels] = useState<Array<any> | null>(null);
+  const [keyword, setKeyword] = useState<string | null>(null);
+
+  async function onSearch() {
+    const response = await youtubeApi.get('/search', {
+      params: {
+        q: keyword,
+      },
+    });
+    console.log(response.data.items);
+    setChanels(response.data?.items);
+  }
+
   return (
     <div className="App">
-      <h1 className="brand-title">Favourites</h1>
+      <h1 className="brand-title">{user?.userName}</h1>
 
-      <button onClick={signOut} type="button">
+      <input
+        className="input"
+        type="text"
+        onChange={e => setKeyword(e.target.value)}
+        placeholder=""
+      />
+
+      <button onClick={onSearch} type="button">
         Sign Out
       </button>
     </div>
