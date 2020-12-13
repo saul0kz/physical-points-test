@@ -2,19 +2,44 @@ import React, { useContext, useState } from 'react';
 import AuthContext from '../../../contexts/auth';
 import youtubeApi from '../../../services/api';
 
+interface Channel {
+  channelTitle: string;
+  channelId: string;
+  thumbnail: string;
+}
+
 const Favourites: React.FC = () => {
-  const { user, signOut } = useContext(AuthContext);
-  const [chanels, setChanels] = useState<Array<any> | null>(null);
+  const { user } = useContext(AuthContext);
+  const [chanels, setChanels] = useState([] as Array<Channel>);
   const [keyword, setKeyword] = useState<string | null>(null);
 
   async function onSearch() {
+    setChanels([]);
     const response = await youtubeApi.get('/search', {
       params: {
         q: keyword,
       },
     });
-    console.log(response.data.items);
-    setChanels(response.data?.items);
+
+    const { items } = response.data;
+    const newChannels: Array<Channel> = [];
+    items.forEach(
+      (item: {
+        snippet: {
+          channelTitle: string;
+          channelId: string;
+          thumbnails: { default: { url: string } };
+        };
+      }) => {
+        const channel: Channel = {
+          channelTitle: item.snippet.channelTitle,
+          channelId: item.snippet.channelId,
+          thumbnail: item.snippet.thumbnails.default.url,
+        };
+        newChannels.push(channel);
+      },
+    );
+    setChanels(newChannels);
   }
 
   return (
@@ -29,8 +54,19 @@ const Favourites: React.FC = () => {
       />
 
       <button onClick={onSearch} type="button">
-        Sign Out
+        Search
       </button>
+
+      {chanels.map(item => {
+        return [
+          <div>
+            <div className="toggler">
+              <img src={item.thumbnail} alt="" />
+            </div>
+            <div>{item.channelTitle}</div>
+          </div>,
+        ];
+      })}
     </div>
   );
 };
