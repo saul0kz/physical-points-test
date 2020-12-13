@@ -15,6 +15,7 @@ interface AuthCOntextData {
   signed: boolean;
   user: User | null;
   signIn(userName: string, password: string): Promise<void>;
+  signUp(userName: string, password: string): Promise<void>;
   signOut(): void;
 }
 
@@ -49,6 +50,21 @@ export const AuthProvidier: React.FC = ({ children }) => {
     }
   }
 
+  async function signUp(userName: string, password: string) {
+    const response = await api.post(`/user/login`, {
+      userName,
+      password,
+    });
+
+    const token = response.headers['x-access-token'];
+    const usr = response.data;
+    if (token) {
+      localStorage.setItem('@PhyTest:token', token);
+      localStorage.setItem('@PhyTest:user', JSON.stringify(usr));
+      setUser(usr);
+    }
+  }
+
   function signOut() {
     setUser(null);
     localStorage.removeItem('@PhyTest:user');
@@ -56,7 +72,9 @@ export const AuthProvidier: React.FC = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ signed: !!user, user, signIn, signUp, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

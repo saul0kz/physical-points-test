@@ -5,48 +5,47 @@
   height: 100vh;
   background-size: cover;
   top: 0;
-  left: 0;
-  display: flex;  
+  left: 0; 
   border-radius: 32px;
 }
 .close-button-container {
-    width: 100%;
-    text-align: right;
+  width: 100%;
+  text-align: right;
 }
 .close-button {
-    width: 14.84px;
-    height: 15.28px;
+  width: 14.84px;
+  height: 15.28px;
 }
 .error {
-    color: red;
-    width: 100%;
+  color: red;
+  width: 100%;
 }
 
 .button {
- border-radius: 50px;
- font-size: 20px;
- padding: 20px;
-
- border-width: 0;
- width: 100%;
-
+  border-radius: 50px;
+  font-size: 20px;
+  padding: 20px;
+  cursor: pointer;
+  border-width: 0;
+  width: 100%;
 }
 
 .black {
- background-color: #000;
- color: #FFF;
+  background-color: #000 !important;
+  color: #fff;
 }
 .disabled {
-    opacity: 0.4;
+  opacity: 0.4;
+  cursor: initial;
 }
 .title {
-    font-size: 24px;
-    font-weight: 500px;
-    line-height: 28.13px;
-    letter-spacing: -2%;
+  font-size: 24px;
+  font-weight: 300px;
+  line-height: 28.13px;
+  letter-spacing: -2%;
 }
 .mb-68 {
-    margin-bottom: 68px;
+  margin-bottom: 68px;
 }
 
 .input {
@@ -72,27 +71,50 @@
   padding-top: calc(0.5em - 1px);
   position: relative;
   vertical-align: top;
-  
 }
 .field {
-    margin: auto;
-    width: 280px;
-    margin-bottom: 20px;  
-    display: flex;
+  margin: auto;
+  
+  margin-bottom: 20px;
+  display: flex;
 }
 
 .form {
-    background-color: #fff;    
+  background-color: #fff;
 }
 
 .sign-container {
   margin: 0 auto;
   margin: auto;
-  max-width: 500px;
-  width: 100%;
+  max-width: 500px; 
   background: #fff;
   padding: 20px 22.16px;
   position: relative;
   border-radius: 32px;
   text-align: center;
+  color: #000;
+}
+.tag-button {
+  width: 100%;
+  cursor: pointer;
+}
+.line, .mail {
+    margin: auto;
+}
+.welcome-box {
+  margin: auto;
+  margin-top: 79px;
+  padding-left: 20px;
+  max-width: 500px;
+}
+
+.mail-container {
+  background-color: #FFF;
+  padding: 29px;
+  width: 30px;
+  height: 30px;
+}
+
+.page-title {
+  margin-top: 30px;
 }

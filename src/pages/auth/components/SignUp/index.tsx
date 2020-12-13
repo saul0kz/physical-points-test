@@ -8,11 +8,11 @@ import line from '../../../../img/line.svg';
 
 interface ChildProps {
   closeForm: () => void;
-  showSiginUp: () => void;
+  showSignIn: () => void;
 }
 
-const Signin: React.FC<ChildProps> = (props: ChildProps) => {
-  const { signIn } = useContext(AuthContext);
+const SiginOut: React.FC<ChildProps> = (props: ChildProps) => {
+  const { signUp } = useContext(AuthContext);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsloading] = useState(false);
   const [userName, setUsername] = useState('');
@@ -21,14 +21,14 @@ const Signin: React.FC<ChildProps> = (props: ChildProps) => {
   async function handleSigin() {
     setIsloading(true);
     try {
-      await signIn(userName, password);
+      await signUp(userName, password);
     } catch (response) {
       setError('Invalid Credentials');
     }
     setIsloading(false);
   }
   const isDisabled = !userName || !password || isLoading;
-  const { closeForm, showSiginUp } = props;
+  const { closeForm, showSignIn } = props;
   return (
     <div className="sign-container">
       <div className="close-button-container">
@@ -39,7 +39,7 @@ const Signin: React.FC<ChildProps> = (props: ChildProps) => {
           onClick={closeForm}
         />
       </div>
-      <div className="title mb-68">Welcome</div>
+      <div className="title mb-68">Create new user</div>
       <div className="form">
         <div className="field">
           <input
@@ -67,12 +67,12 @@ const Signin: React.FC<ChildProps> = (props: ChildProps) => {
             className={isDisabled ? 'button black disabled' : 'button black '}
             onClick={handleSigin}
           >
-            Sign in
+            Sign up
           </button>
         </div>
 
-        <div role="button" className="field" onClick={showSiginUp}>
-          <div className="tag-button">new user</div>
+        <div role="button" className="field" onClick={showSignIn}>
+          <div className="tag-button">login</div>
         </div>
       </div>
       <div>
@@ -82,4 +82,4 @@ const Signin: React.FC<ChildProps> = (props: ChildProps) => {
   );
 };
 
-export default Signin;
+export default SiginOut;
