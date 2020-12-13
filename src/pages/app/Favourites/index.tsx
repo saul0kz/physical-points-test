@@ -1,6 +1,9 @@
-import React, { useContext, useState } from 'react';
-import AuthContext from '../../../contexts/auth';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useState } from 'react';
+
 import youtubeApi from '../../../services/api';
+import searchIcon from '../../../img/search.svg';
 
 interface Channel {
   channelTitle: string;
@@ -9,7 +12,6 @@ interface Channel {
 }
 
 const Favourites: React.FC = () => {
-  const { user } = useContext(AuthContext);
   const [chanels, setChanels] = useState([] as Array<Channel>);
   const [keyword, setKeyword] = useState<string | null>(null);
 
@@ -43,19 +45,18 @@ const Favourites: React.FC = () => {
   }
 
   return (
-    <div className="App">
-      <h1 className="brand-title">{user?.userName}</h1>
-
-      <input
-        className="input"
-        type="text"
-        onChange={e => setKeyword(e.target.value)}
-        placeholder=""
-      />
-
-      <button onClick={onSearch} type="button">
-        Search
-      </button>
+    <div className="search-page">
+      <div className="search-form">
+        <input
+          className="input search-input"
+          type="text"
+          onChange={e => setKeyword(e.target.value)}
+          placeholder=""
+        />
+        <div onClick={onSearch} className="search-button">
+          <img className="search-image" src={searchIcon} alt="" />
+        </div>
+      </div>
 
       {chanels.map(item => {
         return [

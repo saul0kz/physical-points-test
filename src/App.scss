@@ -5,7 +5,7 @@
   height: 100vh;
   background-size: cover;
   top: 0;
-  left: 0; 
+  left: 0;
   border-radius: 32px;
 }
 .close-button-container {
@@ -74,7 +74,7 @@
 }
 .field {
   margin: auto;
-  
+
   margin-bottom: 20px;
   display: flex;
 }
@@ -86,7 +86,7 @@
 .sign-container {
   margin: 0 auto;
   margin: auto;
-  max-width: 500px; 
+  max-width: 500px;
   background: #fff;
   padding: 20px 22.16px;
   position: relative;
@@ -98,10 +98,11 @@
   width: 100%;
   cursor: pointer;
 }
-.line, .mail {
-    margin: auto;
+.line,
+.mail {
+  margin: auto;
 }
-.welcome-box {
+.welcome-box, .search-page {
   margin: auto;
   margin-top: 79px;
   padding-left: 20px;
@@ -109,7 +110,7 @@
 }
 
 .mail-container {
-  background-color: #FFF;
+  background-color: #fff;
   padding: 29px;
   width: 30px;
   height: 30px;
@@ -117,4 +118,22 @@
 
 .page-title {
   margin-top: 30px;
+}
+
+.search-form {
+  display: flex;
+}
+.search-input {
+  margin-right: 28px;
+}
+
+.search-button {
+  text-align: center;
+  width: 15%;
+  display: flex;
+  background-color: #000;
+  border-radius: 4px;
+}
+.search-image {
+  margin: auto;
 }
