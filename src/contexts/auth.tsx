@@ -52,9 +52,18 @@ export const AuthProvidier: React.FC = ({ children }) => {
     const usuario = { userName, password };
 
     const users = JSON.parse(localStorage.getItem('@PhyTest:users') || '[]');
-    users.push(usuario);
-    localStorage.setItem('@PhyTest:users', JSON.stringify(users));
-    signIn(userName, password);
+    const found = users.find(
+      (element: { userName: string; password: string }) =>
+        element.userName === userName,
+    );
+    if (found) {
+      const erroMessage = 'Invalid Credentials';
+      throw erroMessage;
+    } else {
+      users.push(usuario);
+      localStorage.setItem('@PhyTest:users', JSON.stringify(users));
+      signIn(userName, password);
+    }
   }
 
   function signOut() {
