@@ -11,11 +11,13 @@ interface ChannelsListProps {
 const ChannelList: React.FC<ChannelsListProps> = (props: ChannelsListProps) => {
   const { channels } = props;
   return (
-    <div>
-      {channels.map(channel => {
-        return [<ChannelRow channel={channel} />];
-      })}
-    </div>
+    <>
+      <div className="channel-list">
+        {channels.map(channel => {
+          return [<ChannelRow channel={channel} />];
+        })}
+      </div>
+    </>
   );
 };
 

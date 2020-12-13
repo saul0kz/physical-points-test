@@ -98,7 +98,7 @@
   width: 100%;
   cursor: pointer;
 }
-.line,
+
 .mail {
   margin: auto;
 }
@@ -136,4 +136,40 @@
 }
 .search-image {
   margin: auto;
+}
+.channel-list {
+  height: 600px;
+  overflow: scroll;
+}
+.channel-row{
+  margin-top: 21px;
+  display: flex; 
+  .channel-title {
+    padding-left: 18px;
+    text-align: left;
+    line-height: 40px;
+    color : #AFAFAF;
+    width: 500px;
+  }
+  .tumb-container {
+  .tumb {
+      width: 40px;
+      height: 40px;
+    }    
+  }
+  .favourite-button {
+    width: 15%;
+    line-height: 40px;
+    text-align: center;
+  }
+  
+}
+.line-box {
+  position: fixed;
+  bottom: 25px;
+  width: 100%;
+  display: flex;
+  .line{
+    margin: auto;
+  }
 }

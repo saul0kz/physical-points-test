@@ -4,6 +4,7 @@ import Buttons from '../components/Buttons';
 import SignIn from '../components/SignIn';
 import SignUp from '../components/SignUp';
 import mail from '../../../img/mail.svg';
+import Line from '../../components/line';
 
 const Home: React.FC = () => {
   const [show, setShow] = useState<string | null>('buttons');
@@ -32,20 +33,23 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="page-container black">
-      <div className="welcome-box">
-        <div className="mail-container">
-          <img className="mail" alt="" src={mail} />
+    <>
+      <div className="page-container black">
+        <div className="welcome-box">
+          <div className="mail-container">
+            <img className="mail" alt="" src={mail} />
+          </div>
+          <div
+            style={{ marginBottom: show === 'buttons' ? '348px' : '140px' }}
+            className="title page-title"
+          >
+            welcome to the jungle
+          </div>
         </div>
-        <div
-          style={{ marginBottom: show === 'buttons' ? '348px' : '140px' }}
-          className="title page-title"
-        >
-          welcome to the jungle
-        </div>
+        {content()}
       </div>
-      {content()}
-    </div>
+      <Line />
+    </>
   );
 };
 

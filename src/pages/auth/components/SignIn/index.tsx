@@ -4,7 +4,6 @@
 import React, { useContext, useState } from 'react';
 import AuthContext from '../../../../contexts/auth';
 import closeButton from '../../../../img/close-button.svg';
-import line from '../../../../img/line.svg';
 
 interface ChildProps {
   closeForm: () => void;
@@ -74,9 +73,6 @@ const Signin: React.FC<ChildProps> = (props: ChildProps) => {
         <div role="button" className="field" onClick={showSiginUp}>
           <div className="tag-button">new user</div>
         </div>
-      </div>
-      <div>
-        <img alt="" src={line} />
       </div>
     </div>
   );

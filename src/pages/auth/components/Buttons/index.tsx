@@ -3,8 +3,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 
-import line from '../../../../img/line.svg';
-
 interface ChildProps {
   showSignIn: () => void;
   showSiginUp: () => void;
@@ -23,9 +21,6 @@ const Signin: React.FC<ChildProps> = (props: ChildProps) => {
         <button type="button" className="button" onClick={showSignIn}>
           Sign in
         </button>
-      </div>
-      <div className="field">
-        <img alt="" src={line} className="line" />
       </div>
     </div>
   );

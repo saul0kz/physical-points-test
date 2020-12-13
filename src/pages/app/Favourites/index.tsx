@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import youtubeApi from '../../../services/api';
 import searchIcon from '../../../img/search.svg';
 import ChannelList from '../components/channelist';
+import Line from '../../components/line';
 
 export interface Channel {
   channelTitle: string;
@@ -46,20 +47,21 @@ const Favourites: React.FC = () => {
   }
 
   return (
-    <div className="search-page">
-      <div className="search-form">
-        <input
-          className="input search-input"
-          type="text"
-          onChange={e => setKeyword(e.target.value)}
-          placeholder=""
-        />
-        <div onClick={onSearch} className="search-button">
-          <img className="search-image" src={searchIcon} alt="" />
+    <>
+      <div className="search-page">
+        <div className="search-form">
+          <input
+            className="input search-input"
+            type="text"
+            onChange={e => setKeyword(e.target.value)}
+            placeholder=""
+          />
+          <div onClick={onSearch} className="search-button">
+            <img className="search-image" src={searchIcon} alt="" />
+          </div>
         </div>
-      </div>
-      <ChannelList channels={channels} />
-      {/*
+        <ChannelList channels={channels} />
+        {/*
       channels.map(item => {
         return [
           <div>
@@ -70,7 +72,9 @@ const Favourites: React.FC = () => {
           </div>,
         ];
       }) */}
-    </div>
+      </div>
+      <Line />
+    </>
   );
 };
 
