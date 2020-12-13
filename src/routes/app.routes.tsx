@@ -12,7 +12,7 @@ const Routes: React.FC = () => {
     <Router>
       <Switch>
         <Route path="/" exact component={Favourites} />
-        <Redirect from="/signIn" to="/" />
+        {/* <Redirect from="/signIn" to="/" /> */}
       </Switch>
     </Router>
   );

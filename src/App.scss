@@ -9,10 +9,33 @@
   display: flex;  
   border-radius: 32px;
 }
+.close-button-container {
+    width: 100%;
+    text-align: right;
+}
+.close-button {
+    width: 14.84px;
+    height: 15.28px;
+}
+
+.button {
+ border-radius: 50px;
+ font-size: 20px;
+ padding: 20px;
+
+ border-width: 0;
+ width: 100%;
+
+}
+
 .black {
  background-color: #000;
+ color: #FFF;
 }
-.page-title {
+.disabled {
+    opacity: 0.4;
+}
+.title {
     font-size: 24px;
     font-weight: 500px;
     line-height: 28.13px;
@@ -22,14 +45,38 @@
     margin-bottom: 68px;
 }
 
-.custom-form-input {
+.input {
   font-size: 16px;
-  max-width: 280px;
+  width: 100%;
   background-color: #ebebeb !important;
   border-color: #ebebeb !important;
   color: #afafaf;
   border-radius: 4px;
+  -webkit-appearance: none;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  justify-content: flex-start;
+  line-height: 1.5;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: calc(0.75em - 1px);
+  padding-right: calc(0.75em - 1px);
+  padding-top: calc(0.5em - 1px);
+  position: relative;
+  vertical-align: top;
+  
 }
+.field {
+    margin: auto;
+    width: 280px;
+    margin-bottom: 20px;  
+    display: flex;
+}
+
 .form {
     background-color: #fff;    
 }
@@ -40,7 +87,7 @@
   max-width: 500px;
   width: 100%;
   background: #fff;
-  padding: 50px 20px;
+  padding: 20px 22.16px;
   position: relative;
   border-radius: 32px;
   text-align: center;

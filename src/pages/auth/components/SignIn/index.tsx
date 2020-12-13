@@ -2,12 +2,13 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import AuthContext from '../../../../contexts/auth';
+import closeButton from '../../../../img/close-button.svg';
 
 const Signin: React.FC = () => {
   const { signIn } = useContext(AuthContext);
   const [error, setError] = useState<string | null>(null);
-  const [userName, setUsername] = useState('flavio');
-  const [password, setPassword] = useState('123');
+  const [userName, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   async function handleSigin() {
     try {
@@ -16,28 +17,39 @@ const Signin: React.FC = () => {
       setError('falha na Autenticação');
     }
   }
-
+  const isDisabled = !userName || !password;
   return (
     <div className="sign-container">
-      <div className="page-title mb-68">Welcome</div>
+      <div className="close-button-container">
+        <img alt="" className="close-button" src={closeButton} />
+      </div>
+      <div className="title mb-68">Welcome</div>
       <div className="form">
         <div className="field">
-          <div className="control">
-            <input
-              className="input custom-form-input"
-              type="text"
-              placeholder="User"
-            />
-          </div>
+          <input
+            className="input"
+            onChange={e => setUsername(e.target.value)}
+            type="text"
+            placeholder="User"
+          />
         </div>
         <div className="field">
-          <div className="control">
-            <input
-              className="input custom-form-input"
-              type="text"
-              placeholder="Password"
-            />
-          </div>
+          <input
+            className="input"
+            type="text"
+            onChange={e => setPassword(e.target.value)}
+            placeholder="Password"
+          />
+        </div>
+        <div className="field">
+          <button
+            disabled={isDisabled}
+            type="button"
+            className={isDisabled ? 'button black disabled' : 'button black '}
+            onClick={handleSigin}
+          >
+            Sign in
+          </button>
         </div>
       </div>
     </div>
