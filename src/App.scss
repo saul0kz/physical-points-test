@@ -1,6 +1,5 @@
 .page-container {
-  font-family: 'Roboto';
-  position: fixed;
+  font-family: 'Roboto';  
   width: 100%;
   height: 100vh;
   background-size: cover;
@@ -103,8 +102,7 @@
   margin: auto;
 }
 .welcome-box, .search-page {
-  margin: auto;
-  margin-top: 79px;
+  margin: auto;  
   padding-left: 20px;
   max-width: 500px;
 }
